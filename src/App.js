@@ -15,10 +15,7 @@ function App() {
           <Switch>
             <Route exact path='/' component={withRouter(HomePage)} />
             <Route exact path='/recipes' component={withRouter(ViewRecipes)} />
-            <Route exact path='/recipes/id/:id' component={withRouter(ViewSingleRecipe)} />
-            <Route exact path='/recipes/id/:id/update' component={withRouter(UpdateRecipe)} />
             <Route exact path='/recipes/add' component={withRouter(AddRecipe)} />
-            <Route exact path='/recipes/id/:id/delete' component={withRouter(DeleteRecipe)} />
           </Switch>
       </Router>
     </div>
