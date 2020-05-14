@@ -8,7 +8,7 @@ class ViewRecipes extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            data: this.props.location.state.data,
+            data: this.props.location.state.data ,
             isLoaded: true,
             error: null,
             isEdit: false,
