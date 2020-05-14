@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.css';
+import { Link } from 'react-router-dom';
 
 
 class ViewRecipes extends React.Component{
@@ -35,7 +36,16 @@ class ViewRecipes extends React.Component{
             <div>
                 <ul>
                     <p>ViewRecipe Component</p>
-                    { data.map(data => ( <li key={data.id}> <a href={`/recipes/id/${data.id}`}> {data.name} </a> </li> )) }
+                    { data.map(data => ( 
+                    <li key={data.id}> 
+                      <Link to={{
+                        pathname: `/recipes/id/${data.id}`,
+                        state: {
+                          data: data
+                        }
+                      }}> {data.name} 
+                      </Link> 
+                    </li> )) }
                 </ul>
             </div>
           );

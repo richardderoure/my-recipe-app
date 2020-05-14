@@ -56,9 +56,9 @@ router.put('/recipes/update', (req,res) => {
 });
 
 //DELETE
-router.delete('/recipes/:id', (req,res) => {
-    let id = req.params.id;
-    db.run('delete from main where id = $id', {$id: id}, (err, row) => {
+router.delete('/recipes/delete', (req,res) => {
+    let id = req.body.id;
+    db.run(`delete from main where id = ${id}`, (err, row) => {
         res.send(`row deleted at id ${id}`);
     })
 });

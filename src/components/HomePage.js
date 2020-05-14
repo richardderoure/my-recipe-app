@@ -1,6 +1,5 @@
 import React from 'react';
 import '../App.css';
-import { BrowserRouter as Router, Link} from 'react-router-dom';
 
 class Main extends React.Component{
     constructor(props){

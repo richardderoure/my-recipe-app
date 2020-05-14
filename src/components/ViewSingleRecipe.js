@@ -1,48 +1,66 @@
 import React from 'react';
 import '../App.css';
 import UpdateRecipe from './UpdateRecipe';
+import DeleteRecipe from './DeleteRecipe';
 
 
 class ViewRecipes extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            data: [],
-            isLoaded: false,
+            data: this.props.location.state.data,
+            isLoaded: true,
             error: null,
-            isEdit: false
+            isEdit: false,
+            isDelete: false,
         }
     }
-
     componentDidMount() {
-        this.getAll();
+        // this.getAll();
        
     }
 
-    getAll = async () => {
-        const url = `http://localhost:3001/recipes/1`;
-        fetch(url)
-        .then(response => response.json())
-        .then(data => this.setState({ isLoaded: true, data: data }))
-        .catch(error => this.setState({ isLoaded: true, error: error }))
-    }
+    // getAll = async () => {
+    //     const url = `http://localhost:3001/recipes/`;
+    //     fetch(url)
+    //     .then(response => response.json())
+    //     .then(data => this.setState({ isLoaded: true, data: data }))
+    //     .catch(error => this.setState({ isLoaded: true, error: error }))
+    // }
 
-    handleClick = () => {
+    handleClickEdit = () => {
         this.setState({ isEdit: true })
     }
+
+    handleClickDelete = () => {
+        let confirm1 = window.confirm("Are you sure you want to do this? This cannot be undone.");
+        if(confirm1){
+            let confirm2 = prompt("To delete this entry, please enter 'danger zone' into the text box below.")
+            if(confirm2==='danger zone'){
+                this.setState({ isDelete: true })
+            }
+        }
+
+
+    }
     render(){
-        const { error, isLoaded, data, isEdit } = this.state;
+    console.log(this.props);
+
+        const { error, isLoaded, data, isEdit, isDelete } = this.state;
         if (error) {
           return <div>Error: There was a problem with your fetch request. See console for more details. {console.log(error.message)}</div>;
         } else if (!isLoaded) {
           return <div>Loading...</div>;
         } else if(isEdit) {
             return <UpdateRecipe data = {data} />
-        } else {
+        } else if(isDelete) {
+            return <DeleteRecipe data = {data} />
+        }  else {
           return (
             <div>
                 <ul>
-                    <button onClick={this.handleClick}>EDIT</button>
+                    <button onClick={this.handleClickEdit}>EDIT</button>
+                    <button onClick={this.handleClickDelete}>DELETE</button>
                     <p>ViewSingleRecipe Component</p>
                     <p>{data.name}</p>
                     <p>{data.description}</p>
