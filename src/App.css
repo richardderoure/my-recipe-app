@@ -39,3 +39,9 @@ background-color: red;
 .component-box:hover{
   background-color: grey;
 }
+li{
+  font-size: 2em;
+}
+li:hover{
+  color: red;
+}
