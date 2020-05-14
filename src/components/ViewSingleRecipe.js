@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.css';
+import UpdateRecipe from './UpdateRecipe';
 
 
 class ViewRecipes extends React.Component{
@@ -8,7 +9,8 @@ class ViewRecipes extends React.Component{
         this.state={
             data: [],
             isLoaded: false,
-            error: null
+            error: null,
+            isEdit: false
         }
     }
 
@@ -25,21 +27,26 @@ class ViewRecipes extends React.Component{
         .catch(error => this.setState({ isLoaded: true, error: error }))
     }
 
+    handleClick = () => {
+        this.setState({ isEdit: true })
+    }
     render(){
-        const { error, isLoaded, data } = this.state;
+        const { error, isLoaded, data, isEdit } = this.state;
         if (error) {
           return <div>Error: There was a problem with your fetch request. See console for more details. {console.log(error.message)}</div>;
         } else if (!isLoaded) {
           return <div>Loading...</div>;
+        } else if(isEdit) {
+            return <UpdateRecipe data = {data} />
         } else {
           return (
             <div>
                 <ul>
-                    <a href="/recipes/id/1/update">EDIT</a>
+                    <button onClick={this.handleClick}>EDIT</button>
                     <p>ViewSingleRecipe Component</p>
-                    <p>{this.state.data.name}</p>
-                    <p>{this.state.data.description}</p>
-                    <p>{this.state.data.difficulty}</p>
+                    <p>{data.name}</p>
+                    <p>{data.description}</p>
+                    <p>{data.difficulty}</p>
                 </ul>
             </div>
           );

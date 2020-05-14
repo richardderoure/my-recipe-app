@@ -16,6 +16,8 @@ class DeleteRecipe extends React.Component{
             <div>
                 <p>DeleteRecipe Component</p>
             </div>
+
+            
         )
     }
 }
