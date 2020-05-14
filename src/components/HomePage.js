@@ -1,53 +1,32 @@
 import React from 'react';
 import '../App.css';
-
+import { BrowserRouter as Router, Link} from 'react-router-dom';
 
 class Main extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            data: [],
-            isLoaded: false,
-            error: null
+            hidden: false,
         }
     }
-
-    componentDidMount() {
-        this.getAll();
-       
-    }
-
-    getAll = async () => {
-        const url = `http://localhost:3001/recipes`;
-        fetch(url)
-        .then(response => response.json())
-        .then(data => this.setState({ isLoaded: true, data: data }))
-        .catch(error => this.setState({ isLoaded: true, error: error }))
-    }
-    
-
-
-
-
 
     render(){
-        const { error, isLoaded, data } = this.state;
-        if (error) {
-          return <div>Error: There was a problem with your fetch request. See console for more details. {console.log(error.message)}</div>;
-        } else if (!isLoaded) {
-          return <div>Loading...</div>;
-        } else {
-          return (
-            <ul>
-              {data.map(data => (
-                <li key={data.name}>
-                  {data.name}
-                </li>
-              ))}
-            </ul>
-          );
-        }
-      }
+        return(
+            
+            <div className="components-container">
+                    <div className="component-box">
+                        <a href="/recipes">
+                            <h2>View Recipes</h2>
+                        </a>
+                    </div>
+                    <div className="component-box">
+                        <a href='/recipes/add'>
+                            <h2>Add Recipes</h2>
+                        </a>
+                    </div>
+            </div>
+        )
+    }
 }
 
 export default Main;

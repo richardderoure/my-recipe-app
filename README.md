@@ -8,3 +8,4 @@
 # DATABASE STRUCTURE
 Relational database using SQLite3.
 Columns: id, name, image, description, difficulty, serves, ingredients, method, prep_time, cook_time, nutrition
+
